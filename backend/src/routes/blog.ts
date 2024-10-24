@@ -30,7 +30,7 @@ blogRouter.use("/*", async (c, next) => {
   }
 });
 
-blogRouter.post("/api/v1/blog", async (c) => {
+blogRouter.post("/", async (c) => {
   const userId = c.get("userId");
   const body = await c.req.json();
   const prisma = new PrismaClient({
@@ -48,7 +48,7 @@ blogRouter.post("/api/v1/blog", async (c) => {
   });
 });
 
-blogRouter.put("/api/v1/blog", async (c) => {
+blogRouter.put("/", async (c) => {
   const body = await c.req.json();
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -67,7 +67,7 @@ blogRouter.put("/api/v1/blog", async (c) => {
   });
 });
 
-blogRouter.get("/api/v1/blog/:id", async (c) => {
+blogRouter.get("/:id", async (c) => {
   const id = c.req.param("id");
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -81,7 +81,7 @@ blogRouter.get("/api/v1/blog/:id", async (c) => {
 });
 
 // Todo: add pagination
-blogRouter.get("/api/v1/blog/bulk", async (c) => {
+blogRouter.get("/bulk", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
