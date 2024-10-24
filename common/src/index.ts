@@ -11,17 +11,17 @@ export const signinSchema = zod.object({
   password: zod.string(),
 });
 
-export const createBlogInput = zod.object({
+export const createBlogSchema = zod.object({
   title: zod.string(),
   content: zod.string(),
 });
 
-export const updateBlogInput = zod.object({
+export const updateBlogSchema = zod.object({
   title: zod.string(),
   content: zod.string(),
 });
 
 export type SignupSchema = zod.infer<typeof signupSchema>;
 export type SigninSchema = zod.infer<typeof signinSchema>;
-export type CreateBlogInput = zod.infer<typeof createBlogInput>;
-export type UpdateBlogInput = zod.infer<typeof updateBlogInput>;
+export type CreateBlogSchema = zod.infer<typeof createBlogSchema>;
+export type UpdateBlogSchema = zod.infer<typeof updateBlogSchema>;
