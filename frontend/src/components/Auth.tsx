@@ -1,14 +1,21 @@
 import { Link } from "react-router-dom";
 import { InputBox } from "./InputBox";
 import { useState } from "react";
-import { SignupSchema } from "@rishibeesu/medium-common";
+import { SigninSchema, SignupSchema } from "@rishibeesu/medium-common";
 
 export function Auth({ type }: { type: "signup" | "signin" }) {
-  const [postInputs, setPostInputs] = useState<SignupSchema>({
-    email: "",
-    password: "",
-    name: "",
-  });
+  const [postInputs, setPostInputs] = useState<SignupSchema | SigninSchema>(
+    type === "signup"
+      ? {
+          email: "",
+          password: "",
+          name: "",
+        }
+      : {
+          email: "",
+          password: "",
+        }
+  );
   return (
     <div className="flex justify-center h-screen">
       <div className="flex flex-col justify-center">
