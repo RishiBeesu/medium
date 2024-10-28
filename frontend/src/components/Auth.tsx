@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
 import { useState } from "react";
 import { SigninSchema, SignupSchema } from "@rishibeesu/medium-common";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export function Auth({ type }: { type: "signup" | "signin" }) {
+  const navigate = useNavigate();
   const [postInputs, setPostInputs] = useState<SignupSchema | SigninSchema>(
     type === "signup"
       ? {
@@ -16,6 +19,21 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
           password: "",
         }
   );
+
+  async function sendRequest() {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
+        postInputs
+      );
+      const token = response.data;
+      localStorage.setItem("token_medium", token);
+      navigate("/blogs");
+    } catch (e) {
+      // Todo: alert user request failed
+    }
+  }
+
   return (
     <div className="flex justify-center h-screen">
       <div className="flex flex-col justify-center">
@@ -73,6 +91,7 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
             }}
           />
           <button
+            onClick={sendRequest}
             type="button"
             className="text-white w-full bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 mt-8"
           >
