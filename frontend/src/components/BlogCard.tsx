@@ -11,7 +11,7 @@ export function BlogCard({ authorName, title, content }: BlogCardProps) {
     <div className="border-b-2 border-b-slate-200 pt-3">
       <div className="flex">
         <div className="flex flex-col justify-center">
-          <Avatar authorName={authorName} />
+          <Avatar innerText={authorName} size="small" />
         </div>
         <div className="flex flex-col justify-center pl-2">{authorName}</div>
       </div>
